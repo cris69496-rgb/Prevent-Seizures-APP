@@ -152,7 +152,7 @@ function Article() {
         <h1 className="mt-3 text-2xl font-extrabold text-foreground">{a.title}</h1>
 
         <div className="mt-6 space-y-6">
-          {a.sections.map((s, i) => (
+          {a.sections.map((s: { h: string; p: string }, i: number) => (
             <section key={i}>
               <h2 className="text-sm font-bold uppercase tracking-wider text-brand">{s.h}</h2>
               <p className="mt-1.5 text-[15px] leading-relaxed text-foreground/90">{s.p}</p>
