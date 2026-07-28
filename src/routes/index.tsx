@@ -1,24 +1,131 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { AlertCircle, BookOpen, PlayCircle, ShieldCheck, Users } from "lucide-react";
+import { MobileShell } from "@/components/MobileShell";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Prevents Seizures — Ayuda ante una convulsión" },
+      {
+        name: "description",
+        content:
+          "Guía de emergencia, biblioteca educativa y videos para asistir con calma a alguien que sufre una convulsión.",
+      },
+      { property: "og:title", content: "Prevents Seizures — Ayuda ante una convulsión" },
+      {
+        property: "og:description",
+        content: "Actúa con confianza en los primeros minutos. Aprende paso a paso.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <MobileShell>
+      <section
+        className="relative overflow-hidden rounded-b-[2rem] px-5 pb-8 pt-10"
+        style={{ background: "var(--gradient-hero)" }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand">
+          Prevents Seizures
+        </p>
+        <h1 className="mt-2 text-3xl font-extrabold leading-tight text-foreground">
+          Actúa con calma.
+          <br />
+          <span className="text-brand">Ayuda con seguridad.</span>
+        </h1>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Una guía clara para acompañar a tus seres queridos durante una convulsión, sin miedo y con
+          información confiable.
+        </p>
+
+        <Link
+          to="/emergencia"
+          className="mt-6 flex items-center justify-between rounded-2xl px-5 py-4 text-white shadow-[var(--shadow-soft)]"
+          style={{ background: "var(--gradient-brand)" }}
+        >
+          <div className="flex items-center gap-3">
+            <span className="grid h-11 w-11 place-items-center rounded-full bg-white/20">
+              <AlertCircle className="h-6 w-6" />
+            </span>
+            <div>
+              <p className="text-xs uppercase tracking-wider text-white/80">Emergencia</p>
+              <p className="text-base font-bold">Abrir guía SOS</p>
+            </div>
+          </div>
+          <span aria-hidden className="text-2xl">›</span>
+        </Link>
+      </section>
+
+      <section className="px-5 pt-6">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+          Explora
+        </h2>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          <QuickCard
+            to="/biblioteca"
+            icon={BookOpen}
+            title="Biblioteca"
+            subtitle="Tipos de convulsiones"
+          />
+          <QuickCard
+            to="/videos"
+            icon={PlayCircle}
+            title="Videos"
+            subtitle="Demostraciones breves"
+          />
+          <QuickCard
+            to="/progreso"
+            icon={ShieldCheck}
+            title="Progreso"
+            subtitle="Tu aprendizaje"
+          />
+          <QuickCard to="/perfiles" icon={Users} title="Perfiles" subtitle="Ser queridos" />
+        </div>
+      </section>
+
+      <section className="px-5 pt-8">
+        <div className="rounded-2xl border border-border bg-secondary/60 p-5">
+          <p className="text-sm font-semibold text-brand-ink">¿Sabías que…?</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            La mayoría de las convulsiones ceden solas en menos de 2 minutos. Tu rol es proteger, no
+            detenerlas.
+          </p>
+          <Link
+            to="/biblioteca"
+            className="mt-3 inline-block text-sm font-semibold text-brand underline-offset-4 hover:underline"
+          >
+            Aprender más →
+          </Link>
+        </div>
+      </section>
+    </MobileShell>
+  );
+}
+
+function QuickCard({
+  to,
+  icon: Icon,
+  title,
+  subtitle,
+}: {
+  to: string;
+  icon: typeof BookOpen;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <Link
+      to={to}
+      className="group flex flex-col gap-2 rounded-2xl border border-border bg-card p-4 transition-shadow hover:shadow-[var(--shadow-soft)]"
     >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+      <span className="grid h-10 w-10 place-items-center rounded-xl bg-secondary text-brand">
+        <Icon className="h-5 w-5" />
+      </span>
+      <p className="text-sm font-semibold text-foreground">{title}</p>
+      <p className="text-xs text-muted-foreground">{subtitle}</p>
+    </Link>
   );
 }
