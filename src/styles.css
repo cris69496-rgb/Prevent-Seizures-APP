@@ -4,6 +4,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-sans: "Inter", "Arial", system-ui, sans-serif;
+  --color-brand: oklch(0.62 0.20 254);
+  --color-brand-soft: oklch(0.96 0.02 250);
+  --color-brand-ink: oklch(0.42 0.16 254);
+  --gradient-hero: linear-gradient(180deg, oklch(0.98 0.02 250) 0%, oklch(1 0 0) 100%);
+  --gradient-brand: linear-gradient(135deg, oklch(0.68 0.18 250), oklch(0.55 0.20 258));
+  --shadow-soft: 0 10px 30px -12px oklch(0.62 0.20 254 / 0.25);
+}
+
+
 /*
  * Design system definition.
  *
