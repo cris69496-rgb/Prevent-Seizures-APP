@@ -2,13 +2,14 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, BookOpen, PlayCircle, TrendingUp, AlertCircle } from "lucide-react";
 import type { ReactNode } from "react";
 
-const tabs = [
+const tabs: { to: string; label: string; icon: typeof Home; highlight?: boolean }[] = [
   { to: "/", label: "Inicio", icon: Home },
   { to: "/biblioteca", label: "Aprender", icon: BookOpen },
   { to: "/emergencia", label: "SOS", icon: AlertCircle, highlight: true },
   { to: "/videos", label: "Videos", icon: PlayCircle },
   { to: "/progreso", label: "Progreso", icon: TrendingUp },
-] as const;
+];
+
 
 export function MobileShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });

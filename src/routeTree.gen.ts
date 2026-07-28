@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ProgresoRouteImport } from './routes/progreso'
+import { Route as PerfilesRouteImport } from './routes/perfiles'
+import { Route as EmergenciaRouteImport } from './routes/emergencia'
+import { Route as BibliotecaRouteImport } from './routes/biblioteca'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BibliotecaSlugRouteImport } from './routes/biblioteca.$slug'
 
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgresoRoute = ProgresoRouteImport.update({
+  id: '/progreso',
+  path: '/progreso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilesRoute = PerfilesRouteImport.update({
+  id: '/perfiles',
+  path: '/perfiles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergenciaRoute = EmergenciaRouteImport.update({
+  id: '/emergencia',
+  path: '/emergencia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibliotecaRoute = BibliotecaRouteImport.update({
+  id: '/biblioteca',
+  path: '/biblioteca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BibliotecaSlugRoute = BibliotecaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BibliotecaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
+  '/emergencia': typeof EmergenciaRoute
+  '/perfiles': typeof PerfilesRoute
+  '/progreso': typeof ProgresoRoute
+  '/videos': typeof VideosRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
+  '/emergencia': typeof EmergenciaRoute
+  '/perfiles': typeof PerfilesRoute
+  '/progreso': typeof ProgresoRoute
+  '/videos': typeof VideosRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/biblioteca': typeof BibliotecaRouteWithChildren
+  '/emergencia': typeof EmergenciaRoute
+  '/perfiles': typeof PerfilesRoute
+  '/progreso': typeof ProgresoRoute
+  '/videos': typeof VideosRoute
+  '/biblioteca/$slug': typeof BibliotecaSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/biblioteca'
+    | '/emergencia'
+    | '/perfiles'
+    | '/progreso'
+    | '/videos'
+    | '/biblioteca/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/biblioteca'
+    | '/emergencia'
+    | '/perfiles'
+    | '/progreso'
+    | '/videos'
+    | '/biblioteca/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/biblioteca'
+    | '/emergencia'
+    | '/perfiles'
+    | '/progreso'
+    | '/videos'
+    | '/biblioteca/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  BibliotecaRoute: typeof BibliotecaRouteWithChildren
+  EmergenciaRoute: typeof EmergenciaRoute
+  PerfilesRoute: typeof PerfilesRoute
+  ProgresoRoute: typeof ProgresoRoute
+  VideosRoute: typeof VideosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progreso': {
+      id: '/progreso'
+      path: '/progreso'
+      fullPath: '/progreso'
+      preLoaderRoute: typeof ProgresoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfiles': {
+      id: '/perfiles'
+      path: '/perfiles'
+      fullPath: '/perfiles'
+      preLoaderRoute: typeof PerfilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergencia': {
+      id: '/emergencia'
+      path: '/emergencia'
+      fullPath: '/emergencia'
+      preLoaderRoute: typeof EmergenciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/biblioteca': {
+      id: '/biblioteca'
+      path: '/biblioteca'
+      fullPath: '/biblioteca'
+      preLoaderRoute: typeof BibliotecaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +184,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/biblioteca/$slug': {
+      id: '/biblioteca/$slug'
+      path: '/$slug'
+      fullPath: '/biblioteca/$slug'
+      preLoaderRoute: typeof BibliotecaSlugRouteImport
+      parentRoute: typeof BibliotecaRoute
+    }
   }
 }
 
+interface BibliotecaRouteChildren {
+  BibliotecaSlugRoute: typeof BibliotecaSlugRoute
+}
+
+const BibliotecaRouteChildren: BibliotecaRouteChildren = {
+  BibliotecaSlugRoute: BibliotecaSlugRoute,
+}
+
+const BibliotecaRouteWithChildren = BibliotecaRoute._addFileChildren(
+  BibliotecaRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  BibliotecaRoute: BibliotecaRouteWithChildren,
+  EmergenciaRoute: EmergenciaRoute,
+  PerfilesRoute: PerfilesRoute,
+  ProgresoRoute: ProgresoRoute,
+  VideosRoute: VideosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
