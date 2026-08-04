@@ -33,9 +33,9 @@ function Index() {
           <img
             src={logoAsset.url}
             alt="Logo de Prevent Seizures S.A.S."
-            className="h-12 w-12 rounded-xl object-cover shadow-[var(--shadow-soft)]"
+            className="h-20 w-20 rounded-2xl object-cover shadow-[var(--shadow-soft)]"
           />
-          <p className="text-xs font-semibold uppercase tracking-widest text-brand">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">
             Prevent Seizures S.A.S.
           </p>
         </div>
