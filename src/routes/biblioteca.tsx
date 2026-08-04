@@ -23,44 +23,66 @@ const topics = [
   {
     slug: "que-es",
     title: "¿Qué es una convulsión?",
-    excerpt: "Una descarga eléctrica anormal en el cerebro que altera brevemente el comportamiento.",
+    excerpt:
+      "Qué ocurre en el cerebro, cómo se clasifican (ILAE 2017) y por qué 5 minutos es la señal de alarma.",
     tag: "Fundamentos",
-    minutes: 4,
+    minutes: 5,
   },
   {
     slug: "tonico-clonica",
     title: "Crisis tónico-clónica generalizada",
-    excerpt: "Rigidez seguida de sacudidas rítmicas. Es la más reconocida y suele durar 1–3 min.",
+    excerpt:
+      "Fase tónica, clónica y postictal, con el protocolo de primeros auxilios del CDC paso a paso.",
     tag: "Epiléptica",
-    minutes: 5,
+    minutes: 6,
   },
   {
     slug: "ausencia",
     title: "Crisis de ausencia",
-    excerpt: "Breves lapsos de desconexión, comunes en niños. Duran segundos y se confunden con distracción.",
-    tag: "Epiléptica",
-    minutes: 3,
-  },
-  {
-    slug: "focal",
-    title: "Crisis focales",
-    excerpt: "Se originan en una zona del cerebro. Pueden causar movimientos o sensaciones extrañas sin perder la conciencia.",
+    excerpt:
+      "Desconexiones de menos de 15 segundos, frecuentes entre los 4 y los 10 años. Cómo reconocerlas.",
     tag: "Epiléptica",
     minutes: 4,
   },
   {
-    slug: "no-epilepticas",
-    title: "Crisis no epilépticas (PNES)",
-    excerpt: "Se manifiestan como convulsiones pero tienen un origen psicógeno. La asistencia enfatiza la calma y el acompañamiento.",
-    tag: "No epiléptica",
+    slug: "focal",
+    title: "Crisis focales",
+    excerpt:
+      "Con o sin alteración de la conciencia. Auras, automatismos y cómo acompañar sin sujetar.",
+    tag: "Epiléptica",
     minutes: 5,
+  },
+  {
+    slug: "no-epilepticas",
+    title: "Crisis no epilépticas psicógenas (CNEP)",
+    excerpt:
+      "Hasta el 30 % de las crisis resistentes en centros especializados. Diagnóstico por video-EEG y acompañamiento.",
+    tag: "No epiléptica",
+    minutes: 6,
   },
   {
     slug: "febriles",
     title: "Convulsiones febriles",
-    excerpt: "Ocurren en niños pequeños asociadas a fiebre alta. Casi siempre son benignas.",
+    excerpt:
+      "Afectan al 2–5 % de los niños entre 6 meses y 5 años. Diferencia entre simples y complejas.",
     tag: "Pediátrica",
-    minutes: 3,
+    minutes: 5,
+  },
+  {
+    slug: "vivir-con-epilepsia",
+    title: "Vivir con epilepsia: mitos y datos",
+    excerpt:
+      "Cinco creencias falsas desmontadas con datos de la OMS y el CDC, y cómo ayudar de verdad.",
+    tag: "Fundamentos",
+    minutes: 5,
+  },
+  {
+    slug: "plan-de-accion",
+    title: "Plan de acción ante convulsiones",
+    excerpt:
+      "Qué incluir en el plan, cómo llevar un diario de crisis y cómo preparar el entorno en casa.",
+    tag: "Cuidadores",
+    minutes: 5,
   },
 ];
 
@@ -71,7 +93,7 @@ function Biblioteca() {
         <p className="text-xs font-semibold uppercase tracking-widest text-brand">Biblioteca</p>
         <h1 className="mt-1 text-2xl font-extrabold text-foreground">Aprende sobre convulsiones</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Lecturas breves para entender los distintos tipos y cómo asistir en cada caso.
+          Contenido basado en fuentes oficiales (OMS, CDC, ILAE, NINDS) para entender cada tipo de crisis y saber cómo asistir.
         </p>
       </header>
 
