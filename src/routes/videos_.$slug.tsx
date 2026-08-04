@@ -130,6 +130,30 @@ function GuidePlayer() {
         <p className="mt-1 text-sm text-muted-foreground">{guide.summary}</p>
       </header>
 
+      {(resumedFrom !== null || saved?.completed) && (
+        <div className="mx-5 mb-3 flex items-center gap-3 rounded-2xl border border-brand/30 bg-secondary p-3">
+          {saved?.completed ? (
+            <CheckCircle2 className="h-5 w-5 shrink-0 text-brand" />
+          ) : (
+            <RotateCcw className="h-5 w-5 shrink-0 text-brand" />
+          )}
+          <p className="flex-1 text-xs text-brand-ink">
+            {saved?.completed
+              ? "Ya completaste esta guía. Puedes repasarla cuando quieras."
+              : `Retomaste desde el paso ${(resumedFrom ?? 0) + 1} de ${stepCount}.`}
+          </p>
+          <button
+            type="button"
+            onClick={restart}
+            className="shrink-0 rounded-full border border-brand px-3 py-1 text-xs font-semibold text-brand"
+          >
+            Empezar de nuevo
+          </button>
+        </div>
+      )}
+
+
+
       <section className="px-5">
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]">
           <div key={index} className="animate-fade-in aspect-video w-full">
