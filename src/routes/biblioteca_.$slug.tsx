@@ -364,7 +364,7 @@ const articles: Record<string, Article> = {
   },
 };
 
-export const Route = createFileRoute("/biblioteca/$slug")({
+export const Route = createFileRoute("/biblioteca_/$slug")({
   loader: ({ params }) => {
     const a = articles[params.slug];
     if (!a) throw notFound();
