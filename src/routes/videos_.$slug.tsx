@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Pause, Play, RotateCcw, SkipBack, SkipForward } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import { GuideScene } from "@/components/GuideScene";
-import { getGuide, videoGuides } from "@/lib/video-guides";
+import { getGuide, videoGuides, type VideoGuide } from "@/lib/video-guides";
 
 export const Route = createFileRoute("/videos_/$slug")({
   loader: ({ params }) => {
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/videos_/$slug")({
 });
 
 function GuidePlayer() {
-  const { guide } = Route.useLoaderData();
+  const { guide } = Route.useLoaderData() as { guide: VideoGuide };
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [elapsed, setElapsed] = useState(0);
