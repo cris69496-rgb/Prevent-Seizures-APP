@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PlayCircle, Clock } from "lucide-react";
+import { PlayCircle, Clock, CheckCircle2, RotateCcw } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import { GuideScene } from "@/components/GuideScene";
+import { useAllGuideProgress, progressPercent } from "@/lib/guide-progress";
 import { videoGuides } from "@/lib/video-guides";
+
 
 
 export const Route = createFileRoute("/videos")({
