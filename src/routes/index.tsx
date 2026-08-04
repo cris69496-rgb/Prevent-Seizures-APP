@@ -28,9 +28,16 @@ function Index() {
         className="relative overflow-hidden rounded-b-[2rem] px-5 pb-8 pt-10"
         style={{ background: "var(--gradient-hero)" }}
       >
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand">
-          Prevent Seizures S.A.S.
-        </p>
+        <div className="flex items-center gap-3">
+          <img
+            src={logoAsset.url}
+            alt="Logo de Prevent Seizures S.A.S."
+            className="h-12 w-12 rounded-xl object-cover shadow-[var(--shadow-soft)]"
+          />
+          <p className="text-xs font-semibold uppercase tracking-widest text-brand">
+            Prevent Seizures S.A.S.
+          </p>
+        </div>
         <h1 className="mt-2 text-3xl font-extrabold leading-tight text-foreground">
           Actúa con calma.
           <br />
