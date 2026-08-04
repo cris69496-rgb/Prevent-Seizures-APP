@@ -395,7 +395,7 @@ export const Route = createFileRoute("/biblioteca/$slug")({
 });
 
 function ArticleView() {
-  const a = Route.useLoaderData();
+  const a = Route.useLoaderData() as Article;
   return (
     <div className="mx-auto min-h-screen w-full max-w-md bg-background pb-16">
       <header
