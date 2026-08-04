@@ -1,9 +1,19 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Pause, Play, RotateCcw, SkipBack, SkipForward } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Pause,
+  Play,
+  RotateCcw,
+  SkipBack,
+  SkipForward,
+} from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import { GuideScene } from "@/components/GuideScene";
+import { useGuideProgress } from "@/lib/guide-progress";
 import { getGuide, videoGuides, type VideoGuide } from "@/lib/video-guides";
+
 
 export const Route = createFileRoute("/videos_/$slug")({
   loader: ({ params }) => {
