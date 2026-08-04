@@ -16,6 +16,7 @@ import { Route as EmergenciaRouteImport } from './routes/emergencia'
 import { Route as BibliotecaRouteImport } from './routes/biblioteca'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VideosSlugRouteImport } from './routes/videos_.$slug'
 import { Route as BibliotecaSlugRouteImport } from './routes/biblioteca_.$slug'
 
 const VideosRoute = VideosRouteImport.update({
@@ -53,6 +54,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VideosSlugRoute = VideosSlugRouteImport.update({
+  id: '/videos_/$slug',
+  path: '/videos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BibliotecaSlugRoute = BibliotecaSlugRouteImport.update({
   id: '/biblioteca_/$slug',
   path: '/biblioteca/$slug',
@@ -68,6 +74,7 @@ export interface FileRoutesByFullPath {
   '/progreso': typeof ProgresoRoute
   '/videos': typeof VideosRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/videos/$slug': typeof VideosSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByTo {
   '/progreso': typeof ProgresoRoute
   '/videos': typeof VideosRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
+  '/videos/$slug': typeof VideosSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +97,7 @@ export interface FileRoutesById {
   '/progreso': typeof ProgresoRoute
   '/videos': typeof VideosRoute
   '/biblioteca_/$slug': typeof BibliotecaSlugRoute
+  '/videos_/$slug': typeof VideosSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +110,7 @@ export interface FileRouteTypes {
     | '/progreso'
     | '/videos'
     | '/biblioteca/$slug'
+    | '/videos/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +121,7 @@ export interface FileRouteTypes {
     | '/progreso'
     | '/videos'
     | '/biblioteca/$slug'
+    | '/videos/$slug'
   id:
     | '__root__'
     | '/'
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/progreso'
     | '/videos'
     | '/biblioteca_/$slug'
+    | '/videos_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +144,7 @@ export interface RootRouteChildren {
   ProgresoRoute: typeof ProgresoRoute
   VideosRoute: typeof VideosRoute
   BibliotecaSlugRoute: typeof BibliotecaSlugRoute
+  VideosSlugRoute: typeof VideosSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/videos_/$slug': {
+      id: '/videos_/$slug'
+      path: '/videos/$slug'
+      fullPath: '/videos/$slug'
+      preLoaderRoute: typeof VideosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/biblioteca_/$slug': {
       id: '/biblioteca_/$slug'
       path: '/biblioteca/$slug'
@@ -204,17 +224,8 @@ const rootRouteChildren: RootRouteChildren = {
   ProgresoRoute: ProgresoRoute,
   VideosRoute: VideosRoute,
   BibliotecaSlugRoute: BibliotecaSlugRoute,
+  VideosSlugRoute: VideosSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

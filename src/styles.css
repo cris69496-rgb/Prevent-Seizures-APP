@@ -154,3 +154,30 @@
     color: var(--color-foreground);
   }
 }
+
+/* --- Animaciones de las guías ilustradas --- */
+@keyframes guide-spin { to { transform: rotate(360deg); } }
+@keyframes guide-breathe { 0%,100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(-4px); opacity: .82; } }
+@keyframes guide-shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@keyframes guide-slide-out { 0% { transform: translateX(0); opacity: 1; } 70%,100% { transform: translateX(32px); opacity: 0; } }
+@keyframes guide-roll { 0% { transform: rotate(0deg); } 60%,100% { transform: rotate(-16deg); } }
+@keyframes guide-pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: .6; } }
+@keyframes guide-dash { to { transform: translateX(-60px); } }
+@keyframes guide-rise { 0% { transform: scaleY(.4); } 100% { transform: scaleY(1); } }
+@keyframes guide-write { 0% { transform: scaleX(.1); } 100% { transform: scaleX(1); } }
+
+.guide-spin { animation: guide-spin 6s linear infinite; }
+.guide-breathe { animation: guide-breathe 2.4s ease-in-out infinite; }
+.guide-shake { animation: guide-shake .5s ease-in-out infinite; }
+.guide-slide-out { animation: guide-slide-out 2.4s ease-in-out infinite; }
+.guide-roll { animation: guide-roll 3s ease-in-out infinite alternate; }
+.guide-pulse { animation: guide-pulse 1.4s ease-in-out infinite; }
+.guide-pop { animation: guide-pulse 2s ease-in-out infinite; transform-origin: center; }
+.guide-dash { animation: guide-dash 1.6s linear infinite; }
+.guide-rise { animation: guide-rise 2.6s ease-in-out infinite alternate; transform-origin: bottom; }
+.guide-write { animation: guide-write 2.4s ease-in-out infinite alternate; transform-origin: left; }
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-spin, .guide-breathe, .guide-shake, .guide-slide-out, .guide-roll,
+  .guide-pulse, .guide-pop, .guide-dash, .guide-rise, .guide-write { animation: none !important; }
+}
