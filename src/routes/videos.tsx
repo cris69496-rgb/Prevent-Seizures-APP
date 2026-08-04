@@ -110,8 +110,5 @@ function Videos() {
       </ul>
     </MobileShell>
   );
-
-    </MobileShell>
-  );
 }
 
