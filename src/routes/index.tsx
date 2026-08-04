@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AlertCircle, BookOpen, PlayCircle, ShieldCheck, Users } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
