@@ -5,9 +5,9 @@ import { useState } from "react";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Iniciar sesión — Prevents Seizures" },
+      { title: "Iniciar sesión — Prevent Seizures S.A.S." },
       { name: "description", content: "Accede para guardar tu progreso y perfiles." },
-      { property: "og:title", content: "Iniciar sesión — Prevents Seizures" },
+      { property: "og:title", content: "Iniciar sesión — Prevent Seizures S.A.S." },
       { property: "og:description", content: "Guarda tu progreso y crea perfiles personalizados." },
     ],
   }),

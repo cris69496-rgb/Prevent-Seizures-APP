@@ -1,17 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AlertCircle, BookOpen, PlayCircle, ShieldCheck, Users } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Prevents Seizures — Ayuda ante una convulsión" },
+      { title: "Prevent Seizures S.A.S. — Ayuda ante una convulsión" },
       {
         name: "description",
         content:
           "Guía de emergencia, biblioteca educativa y videos para asistir con calma a alguien que sufre una convulsión.",
       },
-      { property: "og:title", content: "Prevents Seizures — Ayuda ante una convulsión" },
+      { property: "og:title", content: "Prevent Seizures S.A.S. — Ayuda ante una convulsión" },
       {
         property: "og:description",
         content: "Actúa con confianza en los primeros minutos. Aprende paso a paso.",
@@ -28,9 +29,16 @@ function Index() {
         className="relative overflow-hidden rounded-b-[2rem] px-5 pb-8 pt-10"
         style={{ background: "var(--gradient-hero)" }}
       >
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand">
-          Prevents Seizures
-        </p>
+        <div className="flex items-center gap-3">
+          <img
+            src={logoAsset.url}
+            alt="Logo de Prevent Seizures S.A.S."
+            className="h-12 w-12 rounded-xl object-cover shadow-[var(--shadow-soft)]"
+          />
+          <p className="text-xs font-semibold uppercase tracking-widest text-brand">
+            Prevent Seizures S.A.S.
+          </p>
+        </div>
         <h1 className="mt-2 text-3xl font-extrabold leading-tight text-foreground">
           Actúa con calma.
           <br />
