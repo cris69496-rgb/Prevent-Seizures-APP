@@ -43,15 +43,31 @@ export const Route = createFileRoute("/videos_/$slug")({
 
 function GuidePlayer() {
   const { guide } = Route.useLoaderData() as { guide: VideoGuide };
+  const stepCount = guide.steps.length;
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [elapsed, setElapsed] = useState(0);
+  const [resumed, setResumed] = useState(false);
+  const [resumedFrom, setResumedFrom] = useState<number | null>(null);
+
+  const { progress: saved, save, reset, hydrated } = useGuideProgress(guide.slug, stepCount);
 
   const step = guide.steps[index];
   const total = useMemo(
     () => guide.steps.reduce((acc, s) => acc + s.seconds, 0),
     [guide],
   );
+
+  // Retomar donde se quedó (una sola vez, tras hidratar).
+  useEffect(() => {
+    if (!hydrated || resumed) return;
+    setResumed(true);
+    if (saved && !saved.completed && saved.step > 0 && saved.step < stepCount) {
+      setIndex(saved.step);
+      setResumedFrom(saved.step);
+      setPlaying(false);
+    }
+  }, [hydrated, resumed, saved, stepCount]);
 
   useEffect(() => {
     setElapsed(0);
@@ -77,6 +93,26 @@ function GuidePlayer() {
 
   const progress = Math.min(100, (elapsed / step.seconds) * 100);
   const finished = index === guide.steps.length - 1 && !playing && elapsed >= step.seconds;
+
+  // Guarda el marcador cada vez que cambia el paso.
+  useEffect(() => {
+    if (!resumed) return;
+    save(index, false);
+  }, [index, resumed, save]);
+
+  useEffect(() => {
+    if (!resumed || !finished) return;
+    save(stepCount - 1, true);
+  }, [finished, resumed, save, stepCount]);
+
+  const restart = () => {
+    reset();
+    setResumedFrom(null);
+    setIndex(0);
+    setElapsed(0);
+    setPlaying(true);
+  };
+
 
   return (
     <MobileShell>
