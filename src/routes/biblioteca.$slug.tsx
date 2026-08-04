@@ -109,7 +109,7 @@ export const Route = createFileRoute("/biblioteca/$slug")({
     loaderData
       ? {
           meta: [
-            { title: `${loaderData.title} — Prevents Seizures` },
+            { title: `${loaderData.title} — Prevent Seizures S.A.S.` },
             { name: "description", content: loaderData.sections[0]?.p ?? "" },
             { property: "og:title", content: loaderData.title },
             { property: "og:description", content: loaderData.sections[0]?.p ?? "" },

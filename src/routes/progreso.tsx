@@ -7,7 +7,7 @@ export const Route = createFileRoute("/progreso")({
     meta: [
       { title: "Progreso — Tu aprendizaje" },
       { name: "description", content: "Revisa guías completadas, videos vistos y certificados." },
-      { property: "og:title", content: "Progreso — Prevents Seizures" },
+      { property: "og:title", content: "Progreso — Prevent Seizures S.A.S." },
       { property: "og:description", content: "Rastrea tu aprendizaje sobre primeros auxilios." },
     ],
   }),

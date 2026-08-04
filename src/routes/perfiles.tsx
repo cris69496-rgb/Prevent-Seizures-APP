@@ -10,7 +10,7 @@ export const Route = createFileRoute("/perfiles")({
         name: "description",
         content: "Crea planes de acción personalizados para cada ser querido.",
       },
-      { property: "og:title", content: "Perfiles — Prevents Seizures" },
+      { property: "og:title", content: "Perfiles — Prevent Seizures S.A.S." },
       { property: "og:description", content: "Planes de acción personalizados por persona." },
     ],
   }),

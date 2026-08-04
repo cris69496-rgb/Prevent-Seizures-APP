@@ -79,10 +79,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Prevents Seizures — Primeros auxilios en convulsiones" },
+      { title: "Prevent Seizures S.A.S. — Primeros auxilios en convulsiones" },
       { name: "description", content: "Guía de emergencia paso a paso, biblioteca educativa y videos para actuar con calma frente a una convulsión." },
-      { name: "author", content: "Prevents Seizures" },
-      { property: "og:title", content: "Prevents Seizures — Primeros auxilios en convulsiones" },
+      { name: "author", content: "Prevent Seizures S.A.S." },
+      { property: "og:title", content: "Prevent Seizures S.A.S. — Primeros auxilios en convulsiones" },
       { property: "og:description", content: "Aprende a asistir a un ser querido durante una convulsión, con guías claras y contenido educativo." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

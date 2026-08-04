@@ -10,7 +10,7 @@ export const Route = createFileRoute("/videos")({
         name: "description",
         content: "Videos breves que muestran cómo asistir durante distintos tipos de convulsiones.",
       },
-      { property: "og:title", content: "Videos — Prevents Seizures" },
+      { property: "og:title", content: "Videos — Prevent Seizures S.A.S." },
       {
         property: "og:description",
         content: "Demostraciones visuales de primeros auxilios en convulsiones.",

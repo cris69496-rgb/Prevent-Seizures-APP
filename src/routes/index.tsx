@@ -5,13 +5,13 @@ import { MobileShell } from "@/components/MobileShell";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Prevents Seizures — Ayuda ante una convulsión" },
+      { title: "Prevent Seizures S.A.S. — Ayuda ante una convulsión" },
       {
         name: "description",
         content:
           "Guía de emergencia, biblioteca educativa y videos para asistir con calma a alguien que sufre una convulsión.",
       },
-      { property: "og:title", content: "Prevents Seizures — Ayuda ante una convulsión" },
+      { property: "og:title", content: "Prevent Seizures S.A.S. — Ayuda ante una convulsión" },
       {
         property: "og:description",
         content: "Actúa con confianza en los primeros minutos. Aprende paso a paso.",
@@ -29,7 +29,7 @@ function Index() {
         style={{ background: "var(--gradient-hero)" }}
       >
         <p className="text-xs font-semibold uppercase tracking-widest text-brand">
-          Prevents Seizures
+          Prevent Seizures S.A.S.
         </p>
         <h1 className="mt-2 text-3xl font-extrabold leading-tight text-foreground">
           Actúa con calma.
