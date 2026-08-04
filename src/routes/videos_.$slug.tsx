@@ -1,9 +1,19 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Pause, Play, RotateCcw, SkipBack, SkipForward } from "lucide-react";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Pause,
+  Play,
+  RotateCcw,
+  SkipBack,
+  SkipForward,
+} from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import { GuideScene } from "@/components/GuideScene";
+import { useGuideProgress } from "@/lib/guide-progress";
 import { getGuide, videoGuides, type VideoGuide } from "@/lib/video-guides";
+
 
 export const Route = createFileRoute("/videos_/$slug")({
   loader: ({ params }) => {
@@ -33,15 +43,31 @@ export const Route = createFileRoute("/videos_/$slug")({
 
 function GuidePlayer() {
   const { guide } = Route.useLoaderData() as { guide: VideoGuide };
+  const stepCount = guide.steps.length;
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [elapsed, setElapsed] = useState(0);
+  const [resumed, setResumed] = useState(false);
+  const [resumedFrom, setResumedFrom] = useState<number | null>(null);
+
+  const { progress: saved, save, reset, hydrated } = useGuideProgress(guide.slug, stepCount);
 
   const step = guide.steps[index];
   const total = useMemo(
     () => guide.steps.reduce((acc, s) => acc + s.seconds, 0),
     [guide],
   );
+
+  // Retomar donde se quedó (una sola vez, tras hidratar).
+  useEffect(() => {
+    if (!hydrated || resumed) return;
+    setResumed(true);
+    if (saved && !saved.completed && saved.step > 0 && saved.step < stepCount) {
+      setIndex(saved.step);
+      setResumedFrom(saved.step);
+      setPlaying(false);
+    }
+  }, [hydrated, resumed, saved, stepCount]);
 
   useEffect(() => {
     setElapsed(0);
@@ -68,6 +94,26 @@ function GuidePlayer() {
   const progress = Math.min(100, (elapsed / step.seconds) * 100);
   const finished = index === guide.steps.length - 1 && !playing && elapsed >= step.seconds;
 
+  // Guarda el marcador cada vez que cambia el paso.
+  useEffect(() => {
+    if (!resumed) return;
+    save(index, false);
+  }, [index, resumed, save]);
+
+  useEffect(() => {
+    if (!resumed || !finished) return;
+    save(stepCount - 1, true);
+  }, [finished, resumed, save, stepCount]);
+
+  const restart = () => {
+    reset();
+    setResumedFrom(null);
+    setIndex(0);
+    setElapsed(0);
+    setPlaying(true);
+  };
+
+
   return (
     <MobileShell>
       <header className="px-5 pb-3 pt-6">
@@ -83,6 +129,30 @@ function GuidePlayer() {
         <h1 className="mt-1 text-xl font-extrabold text-foreground">{guide.title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">{guide.summary}</p>
       </header>
+
+      {(resumedFrom !== null || saved?.completed) && (
+        <div className="mx-5 mb-3 flex items-center gap-3 rounded-2xl border border-brand/30 bg-secondary p-3">
+          {saved?.completed ? (
+            <CheckCircle2 className="h-5 w-5 shrink-0 text-brand" />
+          ) : (
+            <RotateCcw className="h-5 w-5 shrink-0 text-brand" />
+          )}
+          <p className="flex-1 text-xs text-brand-ink">
+            {saved?.completed
+              ? "Ya completaste esta guía. Puedes repasarla cuando quieras."
+              : `Retomaste desde el paso ${(resumedFrom ?? 0) + 1} de ${stepCount}.`}
+          </p>
+          <button
+            type="button"
+            onClick={restart}
+            className="shrink-0 rounded-full border border-brand px-3 py-1 text-xs font-semibold text-brand"
+          >
+            Empezar de nuevo
+          </button>
+        </div>
+      )}
+
+
 
       <section className="px-5">
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]">
