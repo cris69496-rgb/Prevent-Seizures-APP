@@ -1,6 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PlayCircle, Clock } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
+import { GuideScene } from "@/components/GuideScene";
+import { videoGuides } from "@/lib/video-guides";
+
 
 export const Route = createFileRoute("/videos")({
   head: () => ({
