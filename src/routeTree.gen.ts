@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ProgresoRouteImport } from './routes/progreso'
 import { Route as PerfilesRouteImport } from './routes/perfiles'
 import { Route as EmergenciaRouteImport } from './routes/emergencia'
@@ -22,6 +23,11 @@ import { Route as BibliotecaSlugRouteImport } from './routes/biblioteca_.$slug'
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
   path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgresoRoute = ProgresoRouteImport.update({
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/emergencia': typeof EmergenciaRoute
   '/perfiles': typeof PerfilesRoute
   '/progreso': typeof ProgresoRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
   '/videos/$slug': typeof VideosSlugRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/emergencia': typeof EmergenciaRoute
   '/perfiles': typeof PerfilesRoute
   '/progreso': typeof ProgresoRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
   '/biblioteca/$slug': typeof BibliotecaSlugRoute
   '/videos/$slug': typeof VideosSlugRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/emergencia': typeof EmergenciaRoute
   '/perfiles': typeof PerfilesRoute
   '/progreso': typeof ProgresoRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
   '/biblioteca_/$slug': typeof BibliotecaSlugRoute
   '/videos_/$slug': typeof VideosSlugRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/emergencia'
     | '/perfiles'
     | '/progreso'
+    | '/reset-password'
     | '/videos'
     | '/biblioteca/$slug'
     | '/videos/$slug'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/emergencia'
     | '/perfiles'
     | '/progreso'
+    | '/reset-password'
     | '/videos'
     | '/biblioteca/$slug'
     | '/videos/$slug'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/emergencia'
     | '/perfiles'
     | '/progreso'
+    | '/reset-password'
     | '/videos'
     | '/biblioteca_/$slug'
     | '/videos_/$slug'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   EmergenciaRoute: typeof EmergenciaRoute
   PerfilesRoute: typeof PerfilesRoute
   ProgresoRoute: typeof ProgresoRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   VideosRoute: typeof VideosRoute
   BibliotecaSlugRoute: typeof BibliotecaSlugRoute
   VideosSlugRoute: typeof VideosSlugRoute
@@ -154,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/videos'
       fullPath: '/videos'
       preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/progreso': {
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmergenciaRoute: EmergenciaRoute,
   PerfilesRoute: PerfilesRoute,
   ProgresoRoute: ProgresoRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   VideosRoute: VideosRoute,
   BibliotecaSlugRoute: BibliotecaSlugRoute,
   VideosSlugRoute: VideosSlugRoute,
@@ -229,13 +250,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
