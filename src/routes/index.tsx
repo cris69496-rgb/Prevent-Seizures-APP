@@ -39,10 +39,10 @@ function Index() {
             Prevent Seizures S.A.S.
           </p>
         </div>
-        <h1 className="mt-2 text-3xl font-extrabold leading-tight text-foreground">
-          Actúa con calma.
+        <h1 className="mt-3 text-3xl font-extrabold leading-tight text-foreground">
+          Lee, Infórmate,
           <br />
-          <span className="text-brand">Ayuda con seguridad.</span>
+          <span className="text-brand">Previene y Salva</span>
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
           Una guía clara para acompañar a tus seres queridos durante una convulsión, sin miedo y con

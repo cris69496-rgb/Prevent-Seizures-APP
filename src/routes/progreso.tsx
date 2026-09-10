@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Award, CheckCircle2, Circle, LogOut, Lock, Cloud } from "lucide-react";
+import { ArrowLeft, Award, CheckCircle2, Circle, LogOut, Lock, Cloud } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import { useAuth } from "@/hooks/use-auth";
 import { useAllGuideProgress, progressPercent } from "@/lib/guide-progress";
@@ -52,6 +52,14 @@ function Progreso() {
     return (
       <MobileShell>
         <div className="min-h-[75vh] px-5 pt-10">
+          <Link
+            to="/"
+            aria-label="Regresar al inicio"
+            className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+          >
+            <ArrowLeft className="h-5 w-5" />
+            Inicio
+          </Link>
           <div className="h-6 w-40 animate-pulse rounded-full bg-secondary" />
           <div className="mt-4 h-28 animate-pulse rounded-2xl bg-secondary" />
         </div>
@@ -62,7 +70,16 @@ function Progreso() {
   if (!isAuthed) {
     return (
       <MobileShell>
-        <div className="flex min-h-[75vh] flex-col items-center justify-center px-6 text-center">
+        <div className="min-h-[75vh] px-5 pt-8">
+          <Link
+            to="/"
+            aria-label="Regresar al inicio"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand"
+          >
+            <ArrowLeft className="h-5 w-5" />
+            Inicio
+          </Link>
+          <div className="flex min-h-[65vh] flex-col items-center justify-center px-1 text-center">
           <span className="grid h-16 w-16 place-items-center rounded-full bg-secondary text-brand">
             <Lock className="h-7 w-7" />
           </span>
@@ -87,6 +104,7 @@ function Progreso() {
           <Link to="/emergencia" className="mt-4 text-sm font-medium text-brand">
             O ir directo a la guía SOS
           </Link>
+          </div>
         </div>
       </MobileShell>
     );
@@ -94,8 +112,17 @@ function Progreso() {
 
   return (
     <MobileShell>
-      <header className="flex items-start justify-between px-5 pb-4 pt-8">
-        <div>
+      <header className="px-5 pb-4 pt-8">
+        <Link
+          to="/"
+          aria-label="Regresar al inicio"
+          className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+        >
+          <ArrowLeft className="h-5 w-5" />
+          Inicio
+        </Link>
+        <div className="flex items-start justify-between">
+          <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-brand">Progreso</p>
           <h1 className="mt-1 text-2xl font-extrabold text-foreground">
             Hola, {profile?.display_name ?? user?.email?.split("@")[0]}
@@ -103,15 +130,16 @@ function Progreso() {
           <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
             <Cloud className="h-3.5 w-3.5" /> Sincronizado en la nube
           </p>
+          </div>
+          <button
+            type="button"
+            onClick={signOut}
+            aria-label="Cerrar sesión"
+            className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted-foreground"
+          >
+            <LogOut className="h-4 w-4" />
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={signOut}
-          aria-label="Cerrar sesión"
-          className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted-foreground"
-        >
-          <LogOut className="h-4 w-4" />
-        </button>
       </header>
 
       <section className="px-5">
