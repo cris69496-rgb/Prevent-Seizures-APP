@@ -156,9 +156,11 @@ function GuidePlayer() {
 
       <section className="px-5">
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]">
-          <div key={index} className="animate-fade-in aspect-video w-full">
-            <GuideScene variant={step.scene} />
-          </div>
+          <YouTubeEmbed youtubeId={guide.video.youtubeId} title={guide.video.title} />
+          <p className="border-b border-border px-4 py-2 text-[11px] text-muted-foreground">
+            Video: {guide.video.title} · {guide.video.channel}
+          </p>
+
 
           <div className="h-1.5 w-full bg-secondary">
             <div
