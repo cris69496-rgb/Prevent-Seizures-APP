@@ -18,12 +18,19 @@ export type GuideStep = {
   seconds: number;
 };
 
+export type GuideVideo = {
+  youtubeId: string;
+  title: string;
+  channel: string;
+};
+
 export type VideoGuide = {
   slug: string;
   title: string;
   tag: string;
   duration: string;
   summary: string;
+  video: GuideVideo;
   steps: GuideStep[];
   sources: { label: string; url: string }[];
 };
@@ -36,6 +43,11 @@ export const videoGuides: VideoGuide[] = [
     duration: "2:14",
     summary:
       "La secuencia completa para colocar a la persona de lado una vez que los movimientos ceden.",
+    video: {
+      youtubeId: "cLA-g8mWal4",
+      title: "Primeros Auxilios: Posición Lateral de Seguridad",
+      channel: "Cruz Roja",
+    },
     steps: [
       {
         title: "Cronometra desde el primer segundo",
@@ -83,6 +95,11 @@ export const videoGuides: VideoGuide[] = [
     tag: "Escenario",
     duration: "3:02",
     summary: "Cómo asegurar el entorno y pedir ayuda cuando la crisis ocurre en un espacio público.",
+    video: {
+      youtubeId: "7MPJauo4DdY",
+      title: "How to help someone who is having a seizure",
+      channel: "British Red Cross",
+    },
     steps: [
       {
         title: "Asegura el entorno primero",
@@ -130,6 +147,11 @@ export const videoGuides: VideoGuide[] = [
     duration: "2:45",
     summary:
       "Afecta al 2–5 % de los niños entre 6 meses y 5 años. La mayoría son benignas y ceden solas.",
+    video: {
+      youtubeId: "K8qVm9Qe6e8",
+      title: "Convulsiones febriles, ¿cómo actuar si tu peque las sufre?",
+      channel: "Pediatría",
+    },
     steps: [
       {
         title: "Mantén la calma y cronometra",
@@ -175,6 +197,11 @@ export const videoGuides: VideoGuide[] = [
     tag: "Cuidado",
     duration: "1:58",
     summary: "La fase postictal puede durar de minutos a horas. Así se acompaña sin agobiar.",
+    video: {
+      youtubeId: "z4aeCWYx4r0",
+      title: "Una crisis en el cole",
+      channel: "Divulgación sobre epilepsia",
+    },
     steps: [
       {
         title: "Habla con frases cortas y calmadas",
@@ -219,6 +246,11 @@ export const videoGuides: VideoGuide[] = [
     tag: "Mitos",
     duration: "2:30",
     summary: "Cuatro acciones frecuentes que hacen daño y qué hacer en su lugar.",
+    video: {
+      youtubeId: "KA-Iubhnzr0",
+      title: "Conocer la epilepsia nos hace iguales",
+      channel: "Vídeo educativo",
+    },
     steps: [
       {
         title: "No sujetes los movimientos",
@@ -258,6 +290,11 @@ export const videoGuides: VideoGuide[] = [
     tag: "Registro",
     duration: "1:40",
     summary: "Un buen registro cambia el tratamiento. Esto es lo mínimo que debes anotar.",
+    video: {
+      youtubeId: "0xtz3wgYSIQ",
+      title: "Estado epiléptico: abordaje y manejo inicial",
+      channel: "TecSalud",
+    },
     steps: [
       {
         title: "Hora de inicio y de fin",

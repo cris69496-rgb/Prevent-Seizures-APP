@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PlayCircle, Clock, CheckCircle2, RotateCcw, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { MobileShell } from "@/components/MobileShell";
-import { GuideScene } from "@/components/GuideScene";
 import { useAllGuideProgress, progressPercent } from "@/lib/guide-progress";
 import { videoGuides } from "@/lib/video-guides";
 
@@ -141,7 +140,12 @@ function Videos() {
                   className="block overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:border-brand/40 hover:shadow-[var(--shadow-soft)]"
                 >
                   <div className="relative aspect-video">
-                    <GuideScene variant={v.steps[0].scene} />
+                    <img
+                      src={`https://i.ytimg.com/vi/${v.video.youtubeId}/hqdefault.jpg`}
+                      alt={v.video.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
                     <span className="absolute inset-0 grid place-items-center">
                       <span className="grid h-14 w-14 place-items-center rounded-full bg-white/90 shadow-[var(--shadow-soft)]">
                         <PlayCircle className="h-8 w-8 text-brand" />
