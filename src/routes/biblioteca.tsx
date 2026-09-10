@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 
 export const Route = createFileRoute("/biblioteca")({
@@ -90,6 +91,14 @@ function Biblioteca() {
   return (
     <MobileShell>
       <header className="px-5 pb-4 pt-8">
+        <Link
+          to="/"
+          aria-label="Regresar al inicio"
+          className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+        >
+          <ArrowLeft className="h-5 w-5" />
+          Inicio
+        </Link>
         <p className="text-xs font-semibold uppercase tracking-widest text-brand">Biblioteca</p>
         <h1 className="mt-1 text-2xl font-extrabold text-foreground">Aprende sobre convulsiones</h1>
         <p className="mt-2 text-sm text-muted-foreground">
