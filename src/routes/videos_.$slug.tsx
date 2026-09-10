@@ -10,7 +10,7 @@ import {
   SkipForward,
 } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
-import { GuideScene } from "@/components/GuideScene";
+import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { useGuideProgress } from "@/lib/guide-progress";
 import { getGuide, videoGuides, type VideoGuide } from "@/lib/video-guides";
 
