@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Award, CheckCircle2, Circle, LogOut, Lock, Cloud } from "lucide-react";
+import { ArrowLeft, Award, Brain, CheckCircle2, Circle, LogOut, Lock, Cloud } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import { useAuth } from "@/hooks/use-auth";
 import { useAllGuideProgress, progressPercent } from "@/lib/guide-progress";
 import { videoGuides } from "@/lib/video-guides";
 import { supabase } from "@/integrations/supabase/client";
+import { quizzes, useQuizResults } from "@/lib/quizzes";
 
 export const Route = createFileRoute("/progreso")({
   head: () => ({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/progreso")({
 function Progreso() {
   const { isAuthed, loading, user } = useAuth();
   const progressMap = useAllGuideProgress();
+  const quizResults = useQuizResults();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -121,8 +123,7 @@ function Progreso() {
           <ArrowLeft className="h-5 w-5" />
           Inicio
         </Link>
-        <div className="flex items-start justify-between">
-          <div>
+        <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-brand">Progreso</p>
           <h1 className="mt-1 text-2xl font-extrabold text-foreground">
             Hola, {profile?.display_name ?? user?.email?.split("@")[0]}
@@ -130,15 +131,6 @@ function Progreso() {
           <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
             <Cloud className="h-3.5 w-3.5" /> Sincronizado en la nube
           </p>
-          </div>
-          <button
-            type="button"
-            onClick={signOut}
-            aria-label="Cerrar sesión"
-            className="grid h-10 w-10 place-items-center rounded-full border border-border text-muted-foreground"
-          >
-            <LogOut className="h-4 w-4" />
-          </button>
         </div>
       </header>
 
@@ -194,6 +186,35 @@ function Progreso() {
         })}
       </ul>
 
+      <section className="mt-8 px-5">
+        <div className="flex items-center justify-between">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Trivias</h2>
+          <span className="text-xs font-semibold text-brand">
+            {Object.keys(quizResults).length}/{Object.keys(quizzes).length} completadas
+          </span>
+        </div>
+        <ul className="mt-3 space-y-2">
+          {Object.entries(quizzes).map(([slug, qz]) => {
+            const r = quizResults[slug];
+            return (
+              <li key={slug}>
+                <Link
+                  to="/biblioteca/$slug"
+                  params={{ slug }}
+                  className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4"
+                >
+                  <Brain className={`h-6 w-6 shrink-0 ${r ? "text-brand" : "text-muted-foreground"}`} />
+                  <p className="flex-1 text-sm text-foreground">{qz.title}</p>
+                  <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${r ? "bg-secondary text-brand-ink" : "text-muted-foreground"}`}>
+                    {r ? `${r.score}/${r.total}` : "Pendiente"}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
       <div className="mt-6 px-5">
         <Link
           to="/perfiles"
@@ -201,6 +222,17 @@ function Progreso() {
         >
           Gestionar perfiles de seres queridos →
         </Link>
+      </div>
+
+      <div className="mt-6 px-5 pb-4">
+        <button
+          type="button"
+          onClick={signOut}
+          className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-destructive/30 bg-destructive/5 py-3 text-sm font-semibold text-destructive transition hover:bg-destructive/10 active:scale-[0.98]"
+        >
+          <LogOut className="h-4 w-4" />
+          Cerrar sesión
+        </button>
       </div>
     </MobileShell>
   );

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { AlertCircle, BookOpen, PlayCircle, ShieldCheck, Users } from "lucide-react";
+import { AlertCircle, BookOpen, Phone, PlayCircle, ShieldCheck, Users } from "lucide-react";
 import { MobileShell } from "@/components/MobileShell";
 import logoAsset from "@/assets/logo.png.asset.json";
 
@@ -65,6 +65,18 @@ function Index() {
           </div>
           <span aria-hidden className="text-2xl">›</span>
         </Link>
+
+        <a
+          href="tel:123"
+          aria-label="Botón de pánico: llamar al 123"
+          className="mt-3 flex items-center justify-center gap-3 rounded-2xl bg-destructive px-5 py-4 text-destructive-foreground shadow-[var(--shadow-soft)] ring-4 ring-destructive/20 active:scale-[0.98]"
+        >
+          <Phone className="h-6 w-6 animate-pulse" />
+          <span className="text-left">
+            <span className="block text-xs uppercase tracking-wider opacity-90">Botón de pánico</span>
+            <span className="block text-lg font-extrabold">Llamar al 123</span>
+          </span>
+        </a>
       </section>
 
       <section className="px-5 pt-6">
