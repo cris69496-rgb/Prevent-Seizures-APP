@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { Quiz } from "@/components/Quiz";
 
 type Source = { label: string; url: string };
 type Article = {
@@ -440,6 +441,8 @@ function ArticleView() {
             </section>
           ))}
         </div>
+
+        <Quiz slug={Route.useParams().slug} />
 
         <section className="mt-10">
           <h2 className="text-sm font-bold uppercase tracking-wider text-brand">Fuentes</h2>

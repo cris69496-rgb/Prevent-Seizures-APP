@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { useAuth } from "@/hooks/use-auth";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -123,12 +124,11 @@ function Auth() {
       </Link>
 
       <div className="mt-8 text-center">
-        <div
-          className="mx-auto grid h-14 w-14 place-items-center rounded-2xl text-white shadow-[var(--shadow-soft)]"
-          style={{ background: "var(--gradient-brand)" }}
-        >
-          <span className="text-2xl font-black">P</span>
-        </div>
+        <img
+          src={logoAsset.url}
+          alt="Logo de Prevent Seizures S.A.S."
+          className="mx-auto h-24 w-24 rounded-2xl object-cover shadow-[var(--shadow-soft)]"
+        />
         <h1 className="mt-4 text-2xl font-extrabold text-foreground">
           {mode === "login"
             ? "Bienvenido de vuelta"
