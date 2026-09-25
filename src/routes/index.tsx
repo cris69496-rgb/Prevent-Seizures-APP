@@ -26,7 +26,7 @@ function Index() {
   return (
     <MobileShell>
       <section
-        className="relative overflow-hidden rounded-b-[2rem] px-5 pb-8 pt-10"
+        className="relative overflow-hidden rounded-b-[2rem] px-5 pb-8 pt-10 md:mt-6 md:rounded-[2rem] md:px-10 md:py-12"
         style={{ background: "var(--gradient-hero)" }}
       >
         <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ function Index() {
         <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
           Explora
         </h2>
-        <div className="mt-3 grid grid-cols-2 gap-3">
+        <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
           <QuickCard
             to="/biblioteca"
             icon={BookOpen}
