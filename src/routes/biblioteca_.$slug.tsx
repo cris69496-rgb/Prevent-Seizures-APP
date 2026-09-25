@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Quiz } from "@/components/Quiz";
+import { useEffect } from "react";
+import { markArticleRead } from "@/lib/achievements";
 
 type Source = { label: string; url: string };
 type Article = {
@@ -397,6 +399,8 @@ export const Route = createFileRoute("/biblioteca_/$slug")({
 
 function ArticleView() {
   const a = Route.useLoaderData() as Article;
+  const { slug } = Route.useParams();
+  useEffect(() => markArticleRead(slug), [slug]);
   return (
     <div className="mx-auto min-h-screen w-full max-w-md bg-background pb-16">
       <header

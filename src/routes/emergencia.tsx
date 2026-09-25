@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Check, Phone } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { markSosViewed } from "@/lib/achievements";
 
 export const Route = createFileRoute("/emergencia")({
   head: () => ({
@@ -60,6 +61,7 @@ const steps = [
 ];
 
 function Emergencia() {
+  useEffect(() => markSosViewed(), []);
   const [done, setDone] = useState<Set<number>>(new Set());
   const toggle = (i: number) => {
     setDone((prev) => {

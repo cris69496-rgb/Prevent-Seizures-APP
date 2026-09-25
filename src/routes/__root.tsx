@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { registerOfflineSupport } from "../lib/register-sw";
 import { OfflineBanner } from "../components/OfflineBanner";
 import { supabase } from "@/integrations/supabase/client";
+import { markFirstOpen } from "@/lib/achievements";
 
 function NotFoundComponent() {
   return (
@@ -127,6 +128,7 @@ function RootComponent() {
 
   useEffect(() => {
     registerOfflineSupport();
+    markFirstOpen();
   }, []);
 
   // Mantiene router y caché alineados con la sesión del usuario.
