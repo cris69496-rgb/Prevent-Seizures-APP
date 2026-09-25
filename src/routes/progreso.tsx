@@ -1,6 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Award, Brain, CheckCircle2, Circle, LogOut, Lock, Cloud } from "lucide-react";
+import { ArrowLeft, Award, Brain, CheckCircle2, Circle, LogOut, Lock, Cloud, Sparkles, UserCheck, Siren, BookOpen, PlayCircle, Heart, Trophy } from "lucide-react";
+import { useAchievementState } from "@/lib/achievements";
+
+const ARTICLE_SLUGS = ["que-es", "tonico-clonica", "ausencia", "focal", "no-epilepticas", "febriles", "vivir-con-epilepsia", "plan-de-accion"];
 import { MobileShell } from "@/components/MobileShell";
 import { useAuth } from "@/hooks/use-auth";
 import { useAllGuideProgress, progressPercent } from "@/lib/guide-progress";
@@ -40,8 +43,30 @@ function Progreso() {
     },
   });
 
+  const { data: lovedCount = 0 } = useQuery({
+    queryKey: ["loved-count", user?.id],
+    enabled: !!user,
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("loved_ones")
+        .select("id", { count: "exact", head: true });
+      return count ?? 0;
+    },
+  });
+
+  const ach = useAchievementState();
   const completed = videoGuides.filter((g) => progressMap[g.slug]?.completed).length;
   const pct = Math.round((completed / videoGuides.length) * 100);
+  const articlesRead = ach.articles.filter((s) => ARTICLE_SLUGS.includes(s)).length;
+  const achievements = [
+    { icon: Sparkles, title: "Bienvenida", desc: "Abriste la app por primera vez", done: !!ach.firstOpen },
+    { icon: UserCheck, title: "Parte del equipo", desc: "Te registraste", done: isAuthed },
+    { icon: Siren, title: "Listo para actuar", desc: "Viste la guía SOS", done: !!ach.sosViewed },
+    { icon: BookOpen, title: "Lector experto", desc: `Leíste todas las guías de Aprender (${articlesRead}/${ARTICLE_SLUGS.length})`, done: articlesRead >= ARTICLE_SLUGS.length },
+    { icon: PlayCircle, title: "Maratón de videos", desc: `Viste todos los videos (${completed}/${videoGuides.length})`, done: completed >= videoGuides.length },
+    { icon: Heart, title: "Red de apoyo", desc: "Agregaste a un ser querido", done: lovedCount > 0 },
+  ];
+  const unlocked = achievements.filter((a) => a.done).length;
 
   const signOut = async () => {
     await queryClient.cancelQueries();
@@ -154,7 +179,44 @@ function Progreso() {
         </div>
       </section>
 
-      <ul className="mt-6 space-y-2 px-5">
+      <section className="mt-6 px-5">
+        <div className="flex items-center justify-between">
+          <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <Trophy className="h-4 w-4 text-brand" /> Logros
+          </h2>
+          <span className="text-xs font-semibold text-brand">
+            {unlocked}/{achievements.length} desbloqueados
+          </span>
+        </div>
+        <ul className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3">
+          {achievements.map((a) => {
+            const Icon = a.icon;
+            return (
+              <li
+                key={a.title}
+                className={`flex flex-col items-center rounded-2xl border p-4 text-center ${
+                  a.done ? "border-brand/30 bg-secondary" : "border-border bg-card opacity-60"
+                }`}
+              >
+                <span
+                  className={`grid h-12 w-12 place-items-center rounded-full ${
+                    a.done ? "text-primary-foreground shadow-[var(--shadow-soft)]" : "bg-muted text-muted-foreground"
+                  }`}
+                  style={a.done ? { background: "var(--gradient-brand)" } : undefined}
+                >
+                  {a.done ? <Icon className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
+                </span>
+                <p className="mt-2 text-sm font-bold text-foreground">{a.title}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{a.desc}</p>
+                <span className="sr-only">{a.done ? "Desbloqueado" : "Bloqueado"}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      <h2 className="mt-8 px-5 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Guías animadas</h2>
+      <ul className="mt-3 space-y-2 px-5">
         {videoGuides.map((g) => {
           const p = progressMap[g.slug];
           const gp = progressPercent(p);
