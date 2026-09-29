@@ -22,8 +22,8 @@ export default defineConfig({
         filename: "sw.js",
         devOptions: { enabled: false },
         manifest: {
-          name: "Prevents Seizures",
-          short_name: "Prevents",
+          name: "Prevent Seizures S.A.S.",
+          short_name: "Prevent Seizures",
           description:
             "Guía de emergencia paso a paso y contenido educativo sobre convulsiones.",
           lang: "es",
