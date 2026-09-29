@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.lovable.preventseizures",
+        "sha256_cert_fingerprints": ["3F:15:78:F6:F5:7C:3A:52:B3:53:4B:2F:6E:02:48:7D:2C:29:55:9C:65:57:25:59:E5:0B:D5:65:4B:40:49:06"]
+      }
+    }]
